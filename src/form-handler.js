@@ -184,7 +184,7 @@ class FreeScanFormHandler {
         // Validate infrastructure selection
         const infrastructureCheckboxes = document.querySelectorAll('input[name=\"infrastructure\"]:checked');
         if (infrastructureCheckboxes.length === 0) {
-            this.showAlert('Veuillez sélectionner au moins un type d\\'infrastructure.', 'warning');
+            this.showAlert('Veuillez sélectionner au moins un type d\'infrastructure.', 'warning');
         }
 
         return isValid;
