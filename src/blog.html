@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | XeOps.ai - Découvertes Innovantes en Cybersécurité</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --xeops-dark: #0f1419;
+            --xeops-surface: #1a1e23;
+            --xeops-border: #2d3748;
+            --xeops-accent: #dc2626;
+            --xeops-light: #e2e8f0;
+        }
+
+        .font-heading { font-family: 'Poppins', sans-serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        .bg-xeops-dark { background-color: var(--xeops-dark); }
+        .bg-xeops-surface { background-color: var(--xeops-surface); }
+        .bg-xeops-accent { background-color: var(--xeops-accent); }
+        .text-xeops-light { color: var(--xeops-light); }
+        .text-xeops-accent { color: var(--xeops-accent); }
+        .border-xeops-border { border-color: var(--xeops-border); }
+
+        .blog-hero {
+            background: linear-gradient(135deg, var(--xeops-dark) 0%, var(--xeops-surface) 100%);
+            position: relative;
+        }
+
+        .blog-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .tag {
+            background: linear-gradient(45deg, var(--xeops-accent), #dc2626);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .featured-badge {
+            background: linear-gradient(45deg, #f59e0b, #f97316);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-xeops-dark text-white py-4 fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="xeops_final_site.html" class="text-2xl font-heading font-bold text-xeops-accent">XeOps.ai</a>
+            <div class="space-x-6">
+                <a href="xeops_final_site.html" class="hover:text-xeops-accent transition-colors">Accueil</a>
+                <a href="compliance.html" class="hover:text-xeops-accent transition-colors">Sécurité</a>
+                <a href="#contact" class="bg-xeops-accent px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="blog-hero pt-24 pb-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="featured-badge inline-block mb-6">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 8px;">
+                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                </svg>
+                Nouvelles quotidiennes
+            </div>
+            <h1 class="text-5xl font-heading font-bold text-white mb-6">
+                Blog <span class="text-xeops-accent">XeOps.ai</span><br>
+                <span class="text-3xl text-gray-300">Découvertes Innovantes</span>
+            </h1>
+            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                Explorez nos dernières recherches, découvertes et innovations
+                dans le domaine de la cybersécurité automatisée par IA.
+            </p>
+        </div>
+    </div>
+
+    <!-- Featured Article -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="featured-badge inline-block mb-8">À la Une</div>
+
+            <div class="bg-gradient-to-r from-gray-50 to-blue-50 rounded-2xl p-8 mb-12">
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="flex items-center space-x-2 mb-4">
+                            <span class="tag">IA</span>
+                            <span class="tag">Innovation</span>
+                            <span class="text-gray-500">Aujourd'hui</span>
+                        </div>
+                        <h2 class="text-3xl font-heading font-bold text-gray-800 mb-4">
+                            Révolution dans la Détection d'Intrusion : Notre IA Découvre des Patterns Invisibles
+                        </h2>
+                        <p class="text-gray-600 mb-6">
+                            Notre équipe de recherche a développé un algorithme révolutionnaire qui détecte
+                            des signatures d'attaques jamais vues auparavant. Cette innovation permet
+                            d'identifier des menaces zero-day avec une précision de 99.7%.
+                        </p>
+                        <a href="#" class="inline-flex items-center bg-xeops-accent text-white px-6 py-3 rounded-lg hover:bg-red-700 transition-colors">
+                            Lire l'article complet
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="lg:order-first">
+                        <div class="bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl p-8 text-white">
+                            <svg class="w-16 h-16 mb-4 opacity-90" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                            </svg>
+                            <h3 class="text-xl font-bold mb-2">99.7% Précision</h3>
+                            <p class="opacity-90">Détection zero-day en temps réel</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Articles -->
+    <section class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-heading font-bold text-center text-gray-800 mb-12">
+                Articles Récents
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Article 1 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-green-400 to-blue-500 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">Sécurité</span>
+                            <span class="text-gray-500 text-sm">Hier</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Nouveau Framework de Test d'Intrusion Automatisé
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Découvrez notre nouveau framework qui automatise 95% des tests de pénétration traditionnels...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-purple-400 to-pink-500 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">IA</span>
+                            <span class="text-gray-500 text-sm">Il y a 2 jours</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Machine Learning et Détection de Malware
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Comment nos algorithmes d'apprentissage automatique identifient les malwares polymorphes...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-yellow-400 to-red-500 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm6 7a1 1 0 011 1v3a1 1 0 11-2 0v-3a1 1 0 011-1zm-3 3a1 1 0 100 2h.01a1 1 0 100-2H10zm-4 1a1 1 0 011-1h.01a1 1 0 110 2H7a1 1 0 01-1-1zm1-4a1 1 0 100 2h.01a1 1 0 100-2H7zm2 0a1 1 0 100 2h.01a1 1 0 100-2H9zm2 0a1 1 0 100 2h.01a1 1 0 100-2H11z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">Recherche</span>
+                            <span class="text-gray-500 text-sm">Il y a 3 jours</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Analyse Comportementale des Attaquants
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Notre étude révèle des patterns comportementaux inédits dans les cyberattaques modernes...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-indigo-400 to-purple-600 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">MITRE</span>
+                            <span class="text-gray-500 text-sm">Il y a 4 jours</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Nouvelles Techniques MITRE ATT&CK Intégrées
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Intégration des dernières techniques de la matrice MITRE ATT&CK v14 dans notre plateforme...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+
+                <!-- Article 5 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-teal-400 to-blue-600 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">Trend</span>
+                            <span class="text-gray-500 text-sm">Il y a 5 jours</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Tendances Cybersécurité 2025
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Analyse des principales tendances et menaces émergentes pour l'année 2025...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+
+                <!-- Article 6 -->
+                <article class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+                    <div class="bg-gradient-to-br from-rose-400 to-pink-600 h-48 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 002 0V3a2 2 0 012 0v1a1 1 0 002 0V3a2 2 0 012 2v6h-1a1 1 0 100 2h1v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2h1a1 1 0 100-2H4V5zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5 0a1 1 0 112 0v6a1 1 0 11-2 0V8z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center space-x-2 mb-3">
+                            <span class="tag">Case Study</span>
+                            <span class="text-gray-500 text-sm">Il y a 6 jours</span>
+                        </div>
+                        <h3 class="text-xl font-heading font-bold text-gray-800 mb-3">
+                            Étude de Cas : Prévention d'une Attaque APT
+                        </h3>
+                        <p class="text-gray-600 mb-4">
+                            Comment XeOps.ai a détecté et bloqué une campagne APT sophistiquée ciblant le secteur financier...
+                        </p>
+                        <a href="#" class="text-xeops-accent hover:underline font-semibold">Lire plus →</a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Load More -->
+            <div class="text-center mt-12">
+                <button class="bg-xeops-accent text-white px-8 py-3 rounded-lg hover:bg-red-700 transition-colors">
+                    Charger plus d'articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-16 bg-xeops-dark text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-heading font-bold mb-8">Restez Informés</h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                Recevez nos dernières découvertes et analyses directement dans votre boîte mail.
+                Publications quotidiennes sur les innovations en cybersécurité.
+            </p>
+            <div class="max-w-md mx-auto flex">
+                <input type="email" placeholder="votre@email.com" class="flex-1 px-4 py-3 rounded-l-lg text-gray-800">
+                <button class="bg-xeops-accent px-6 py-3 rounded-r-lg hover:bg-red-700 transition-colors">
+                    S'abonner
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 XeOps.ai. Tous droits réservés. | Blog Cybersécurité & Innovation</p>
+        </div>
+    </footer>
+</body>
+</html>

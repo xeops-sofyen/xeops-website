@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Gratuit | XeOps.ai - Cybersécurité Automatisée</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        :root {
+            --xeops-dark: #0f1419;
+            --xeops-surface: #1a1e23;
+            --xeops-border: #2d3748;
+            --xeops-accent: #dc2626;
+            --xeops-light: #e2e8f0;
+        }
+
+        .font-heading { font-family: 'Poppins', sans-serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        .bg-xeops-dark { background-color: var(--xeops-dark); }
+        .bg-xeops-surface { background-color: var(--xeops-surface); }
+        .bg-xeops-accent { background-color: var(--xeops-accent); }
+        .text-xeops-light { color: var(--xeops-light); }
+        .text-xeops-accent { color: var(--xeops-accent); }
+        .border-xeops-border { border-color: var(--xeops-border); }
+
+        .form-hero {
+            background: linear-gradient(135deg, var(--xeops-dark) 0%, var(--xeops-surface) 100%);
+            position: relative;
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-field {
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(220, 38, 38, 0.1);
+        }
+
+        .step-indicator {
+            background: linear-gradient(45deg, var(--xeops-accent), #dc2626);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--xeops-accent);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-checkmark {
+            animation: checkmark 0.5s ease-in-out;
+        }
+
+        @keyframes checkmark {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* XeOps Logo */
+        .xeops-logo svg {
+            width: 120px;
+            height: auto;
+            margin-right: 8px;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: var(--xeops-dark);
+            border: 1px solid var(--xeops-border);
+            border-radius: 8px;
+            min-width: 120px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .language-switcher:hover .language-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Language Content Display */
+        .fr-content {
+            display: none;
+        }
+
+        .lang-fr .en-content {
+            display: none;
+        }
+
+        .lang-fr .fr-content {
+            display: inline;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Navigation -->
+    <nav class="bg-xeops-dark text-white py-4 fixed w-full top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="xeops_final_site.html" class="flex items-center xeops-logo">
+                <svg width="120" height="30" viewBox="0 0 3135.4401805869074 812.6297742920726">
+                    <g transform="scale(6.772009029345371) translate(10, 10)">
+                        <g featureKey="symbolFeature-0" transform="matrix(1.11111544387058,0,0,1.11111544387058,-5.42930547909648,-5.556823888473415)" fill="#fff">
+                            <g><path d="M42.817,43.713c-2.543,2.415-6.376,2.188-8.789-0.364c-2.29-2.409-2.315-6.254,0.228-8.663   c2.423-2.289,6.376-2.188,8.671,0.229C45.343,37.459,45.231,41.418,42.817,43.713 M64.765,66.849   c-2.54,2.409-6.379,2.181-8.68-0.233c-2.404-2.546-2.302-6.248,0.239-8.669c2.414-2.29,6.253-2.312,8.662,0.228   C67.282,60.595,67.18,64.553,64.765,66.849"/><path d="M55.196,55.787c-3.024,2.871-7.598,2.592-10.315-0.273c-2.876-3.023-2.888-7.592,0.131-10.457   c2.871-2.728,7.586-2.603,10.446,0.422C58.187,48.355,58.061,53.06,55.196,55.787"/><path d="M32.499,54.221c-1.902,1.801-5,1.607-6.809-0.301c-1.809-1.914-1.726-4.882,0.185-6.688   c1.905-1.811,4.998-1.856,6.806,0.052C34.493,49.191,34.41,52.41,32.499,54.221"/><path d="M51.665,74.429c-1.902,1.812-4.875,1.731-6.681-0.171c-1.814-1.907-1.854-5.012,0.057-6.817   c1.902-1.816,5.126-1.72,6.932,0.183C53.783,69.531,53.573,72.624,51.665,74.429"/></g>
+                        </g>
+                        <g featureKey="nameFeature-0" transform="matrix(0.9157777369871135,0,0,0.9157777369871135,155.0000008733537,12.18286416166652)" fill="#fff">
+                            <path d="M19.4 11.96 l11.32 0 l-9.68 14 l9.68 14.04 l-11.32 0 l-4.04 -5.84 l-4.04 5.84 l-11.32 0 l13.48 -19.52 l-3.72 -5.4 l-3.8 0 l3.72 5.4 l-1.88 2.72 l-7.8 -11.24 l11.36 0 l5.92 8.52 l-11.32 16.4 l3.72 0 l5.68 -8.2 l5.68 8.2 l3.76 0 l-7.56 -10.92 l7.52 -10.88 l-3.8 0 l-1.8 2.64 l-1.92 -2.76 z M71.256 11.96 l0 9.36 l-21.24 0 l0 3.12 l15.76 0 l0 3.12 l-18.88 0 l0 -9.36 l21.24 0 l0 -3.12 l-24.36 0 l0 21.8 l24.36 0 l0 -3.12 l-21.24 0 l0 -3.12 l24.36 0 l0 9.36 l-30.6 0 l0 -28.04 l30.6 0 z M96.47200000000001 10.719999999999999 c8.4 0 15.24 6.84 15.24 15.28 s-6.84 15.24 -15.24 15.24 c-8.44 0 -15.28 -6.8 -15.28 -15.24 s6.84 -15.28 15.28 -15.28 z M96.47200000000001 38.16 c6.72 0 12.16 -5.44 12.16 -12.16 s-5.44 -12.2 -12.16 -12.2 c-6.76 0 -12.2 5.48 -12.2 12.2 s5.44 12.16 12.2 12.16 z M96.47200000000001 16.88 c5 0 9.08 4.12 9.08 9.12 s-4.08 9.08 -9.08 9.08 s-9.12 -4.08 -9.12 -9.08 s4.12 -9.12 9.12 -9.12 z M96.47200000000001 32 c3.32 0 6 -2.68 6 -6 c0 -3.36 -2.68 -6.04 -6 -6.04 c-3.36 0 -6.04 2.68 -6.04 6.04 c0 3.32 2.68 6 6.04 6 z M119.568 11.96 l22.84 0 c4.28 0 7.76 3.48 7.76 7.8 c0 4.28 -3.48 7.8 -7.76 7.8 l-19.72 -0.04 l0 9.36 l3.12 0 l0 -6.24 l3.08 0 l0 9.36 l-9.32 0 l0 -15.6 l22.84 0.04 c2.56 0 4.64 -2.12 4.64 -4.68 c0 -2.6 -2.08 -4.68 -4.64 -4.68 l-19.72 0 l0 3.12 l19.72 0 c0.8 0.04 1.48 0.72 1.48 1.56 s-0.64 1.52 -1.56 1.56 l-0.04 0 l-22.72 0 l0 -9.36 z M181.18399999999997 27.560000000000002 c-15.88 0 -16.12 -0.04 -16.32 -0.04 l-0.08 0 c-4 -0.32 -7.08 -3.72 -7.08 -7.76 c0 -4.32 3.48 -7.8 7.8 -7.8 l16.8 0 c3.36 0 6.08 2.72 6.08 6.12 l0 3.24 l-22.76 0 l-0.04 0 l-0.04 0 c-0.92 -0.04 -1.52 -0.72 -1.52 -1.56 s0.64 -1.52 1.48 -1.56 l19.76 0 l0 -0.08 c0 -1.72 -1.32 -3.04 -3.04 -3.04 l-16.72 0 c-2.56 0 -4.68 2.08 -4.68 4.68 c0 2.4 1.8 4.32 4.08 4.64 c15.96 0 16.12 0.04 16.4 0.04 c4 0.32 7.08 3.76 7.08 7.76 c0 4.32 -3.48 7.8 -7.76 7.8 l-16.84 0 c-3.36 0 -6.08 -2.72 -6.08 -6.08 l0 -3.28 l22.92 0 c1.96 0.12 1.96 3 0 3.12 l-19.8 0 l0 0.08 c0 1.72 1.32 3.04 3.04 3.04 l16.76 0 c2.52 0 4.68 -2 4.68 -4.68 c0 -2.4 -1.8 -4.32 -4.12 -4.64 z M203.04 30.6 c2.56 0 4.72 2.16 4.72 4.72 c0 2.6 -2.16 4.68 -4.72 4.68 c-2.6 0 -4.68 -2.08 -4.68 -4.68 c0 -2.56 2.08 -4.72 4.68 -4.72 z M203.04 36.88 c0.92 0 1.56 -0.72 1.56 -1.56 c0 -0.92 -0.64 -1.56 -1.56 -1.56 c-0.84 0 -1.56 0.64 -1.56 1.56 c0 0.84 0.72 1.56 1.56 1.56 z M237.456 30.64 l1.8 -3.12 l5.44 9.36 l3.6 0 c-0.8 -1.28 -8.4 -14.28 -9.04 -15.56 l-7.84 13.6 l-2.92 5.08 l-10.8 0 c0.6 -1 4.64 -8.04 8.52 -14.8 c2.28 -3.96 4.8 -8.4 7.64 -13.24 l3.6 0 l-7.44 12.88 l-6.92 12.04 l3.6 0 c4.92 -8.68 8 -13.8 12.56 -21.8 c0.28 0.48 14.36 24.88 14.44 24.92 l-10.8 0 z M272.992 40 l-9.36 0 l0 -28.04 l9.36 0 l0 21.8 l-3.12 0 l0 -18.68 l-3.12 0 l0 21.8 l6.24 0 l0 3.12 z"/>
+                        </g>
+                    </g>
+                </svg>
+            </a>
+            <div class="flex items-center space-x-6">
+                <a href="xeops_final_site.html" class="hover:text-xeops-accent transition-colors">
+                    <span class="en-content">Home</span>
+                    <span class="fr-content">Accueil</span>
+                </a>
+                <a href="blog.html" class="hover:text-xeops-accent transition-colors">Blog</a>
+                <a href="compliance.html" class="hover:text-xeops-accent transition-colors">
+                    <span class="en-content">Security</span>
+                    <span class="fr-content">Sécurité</span>
+                </a>
+
+                <!-- Language Switcher -->
+                <div class="language-switcher">
+                    <button class="text-xeops-light hover:text-xeops-accent transition-colors text-sm">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 4px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="m5 5 14 14"/><path d="M9 12c0 4.97 2.01 9 4.5 9s4.5-4.03 4.5-9-2.01-9-4.5-9S9 7.03 9 12z"/></svg> <span class="en-content">EN</span><span class="fr-content">FR</span> ▼
+                    </button>
+                    <div class="language-dropdown">
+                        <a href="#" onclick="switchLanguage('en')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">English</a>
+                        <a href="#" onclick="switchLanguage('fr')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">Français</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="form-hero pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="inline-block bg-green-100 text-green-800 px-4 py-2 rounded-full font-semibold mb-6">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 8px;">
+                        <polyline points="20,6 9,17 4,12"/>
+                    </svg>
+                    <span class="en-content">100% Free - No Credit Card Required</span>
+                    <span class="fr-content">100% Gratuit - Aucune Carte Requise</span>
+                </div>
+                <h1 class="text-5xl font-heading font-bold text-white mb-6">
+                    <span class="en-content">Free Security<br><span class="text-xeops-accent">Scan</span></span>
+                    <span class="fr-content">Scan de Sécurité<br><span class="text-xeops-accent">Gratuit</span></span>
+                </h1>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    <span class="en-content">Get a complete analysis of your infrastructure in less than 24h. Our AI detects vulnerabilities that other tools miss.</span>
+                    <span class="fr-content">Obtenez une analyse complète de votre infrastructure en moins de 24h. Notre IA détecte les vulnérabilités que les autres outils manquent.</span>
+                </p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="max-w-2xl mx-auto">
+                <div class="form-container p-8">
+                    <!-- Progress Steps -->
+                    <div class="flex justify-center items-center space-x-4 mb-8">
+                        <div class="flex items-center">
+                            <div class="step-indicator">1</div>
+                            <span class="ml-2 text-sm text-gray-600">
+                                <span class="en-content">Information</span>
+                                <span class="fr-content">Informations</span>
+                            </span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 rounded"></div>
+                        <div class="flex items-center">
+                            <div class="step-indicator opacity-50">2</div>
+                            <span class="ml-2 text-sm text-gray-400">
+                                <span class="en-content">Verification</span>
+                                <span class="fr-content">Vérification</span>
+                            </span>
+                        </div>
+                        <div class="flex-1 h-1 bg-gray-200 rounded"></div>
+                        <div class="flex items-center">
+                            <div class="step-indicator opacity-50">3</div>
+                            <span class="ml-2 text-sm text-gray-400">
+                                <span class="en-content">Confirmation</span>
+                                <span class="fr-content">Confirmation</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Alert Messages -->
+                    <div id="alertMessage" class="hidden mb-6 p-4 rounded-lg"></div>
+
+                    <!-- Form -->
+                    <form id="freeScanForm" class="space-y-6">
+                        <!-- Personal Information -->
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <span class="en-content">First Name *</span>
+                                    <span class="fr-content">Prénom *</span>
+                                </label>
+                                <input type="text" id="firstName" name="firstName" required
+                                    class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <span class="en-content">Last Name *</span>
+                                    <span class="fr-content">Nom *</span>
+                                </label>
+                                <input type="text" id="lastName" name="lastName" required
+                                    class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <span class="en-content">Professional Email *</span>
+                                <span class="fr-content">Email Professionnel *</span>
+                            </label>
+                            <input type="email" id="email" name="email" required
+                                class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none"
+                                placeholder="your.name@company.com">
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="company" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <span class="en-content">Company *</span>
+                                    <span class="fr-content">Entreprise *</span>
+                                </label>
+                                <input type="text" id="company" name="company" required
+                                    class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                            </div>
+                            <div>
+                                <label for="jobTitle" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    <span class="en-content">Job Title</span>
+                                    <span class="fr-content">Poste</span>
+                                </label>
+                                <input type="text" id="jobTitle" name="jobTitle"
+                                    class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none"
+                                    placeholder="e.g.: CISO, IT Manager">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-semibold text-gray-700 mb-2">
+                                <span class="en-content">Phone</span>
+                                <span class="fr-content">Téléphone</span>
+                            </label>
+                            <input type="tel" id="phone" name="phone"
+                                class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none"
+                                placeholder="+1 555 123 4567">
+                        </div>
+
+                        <!-- Company Information -->
+                        <div class="border-t pt-6">
+                            <h3 class="text-lg font-heading font-bold text-gray-800 mb-4">Informations Entreprise</h3>
+
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="companySize" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Taille de l'entreprise *
+                                    </label>
+                                    <select id="companySize" name="companySize" required
+                                        class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                                        <option value="">Sélectionner...</option>
+                                        <option value="1-10">1-10 employés</option>
+                                        <option value="11-50">11-50 employés</option>
+                                        <option value="51-200">51-200 employés</option>
+                                        <option value="201-1000">201-1000 employés</option>
+                                        <option value="1000+">1000+ employés</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="industry" class="block text-sm font-semibold text-gray-700 mb-2">
+                                        Secteur d'activité *
+                                    </label>
+                                    <select id="industry" name="industry" required
+                                        class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                                        <option value="">Sélectionner...</option>
+                                        <option value="finance">Finance & Banque</option>
+                                        <option value="healthcare">Santé</option>
+                                        <option value="technology">Technologie</option>
+                                        <option value="manufacturing">Industrie</option>
+                                        <option value="retail">Commerce</option>
+                                        <option value="government">Secteur Public</option>
+                                        <option value="education">Éducation</option>
+                                        <option value="other">Autre</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Infrastructure Details -->
+                        <div class="border-t pt-6">
+                            <h3 class="text-lg font-heading font-bold text-gray-800 mb-4">Infrastructure</h3>
+
+                            <div>
+                                <label for="infrastructure" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Type d'infrastructure (sélection multiple)
+                                </label>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="infrastructure" value="on-premise" class="mr-2">
+                                        <span>On-premise</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="infrastructure" value="cloud" class="mr-2">
+                                        <span>Cloud (AWS, Azure, GCP)</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="infrastructure" value="hybrid" class="mr-2">
+                                        <span>Hybride</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" name="infrastructure" value="saas" class="mr-2">
+                                        <span>SaaS uniquement</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <label for="urgency" class="block text-sm font-semibold text-gray-700 mb-2">
+                                    Urgence du scan
+                                </label>
+                                <select id="urgency" name="urgency"
+                                    class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none">
+                                    <option value="normal">Normal (24-48h)</option>
+                                    <option value="urgent">Urgent (< 24h)</option>
+                                    <option value="critical">Critique (< 12h)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div>
+                            <label for="challenges" class="block text-sm font-semibold text-gray-700 mb-2">
+                                Défis cybersécurité actuels (optionnel)
+                            </label>
+                            <textarea id="challenges" name="challenges" rows="4"
+                                class="input-field w-full p-3 rounded-lg border border-gray-300 focus:border-xeops-accent focus:outline-none"
+                                placeholder="Décrivez vos principaux défis en matière de cybersécurité..."></textarea>
+                        </div>
+
+                        <!-- GDPR Consent -->
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <div class="flex items-start">
+                                <input type="checkbox" id="gdprConsent" name="gdprConsent" required class="mt-1 mr-3">
+                                <label for="gdprConsent" class="text-sm text-gray-700">
+                                    <strong>Consentement GDPR *</strong><br>
+                                    J'accepte que XeOps.ai traite mes données personnelles pour fournir le scan de sécurité gratuit.
+                                    Mes données seront utilisées uniquement pour ce service et ne seront pas partagées avec des tiers.
+                                    <a href="compliance.html" class="text-xeops-accent hover:underline">En savoir plus sur notre politique de confidentialité</a>.
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Marketing Consent -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-start">
+                                <input type="checkbox" id="marketingConsent" name="marketingConsent" class="mt-1 mr-3">
+                                <label for="marketingConsent" class="text-sm text-gray-700">
+                                    J'accepte de recevoir des informations sur les nouveaux services et innovations de XeOps.ai.
+                                    (Optionnel - vous pouvez vous désabonner à tout moment)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- reCAPTCHA -->
+                        <div class="flex justify-center">
+                            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button type="submit" id="submitBtn"
+                            class="w-full bg-gradient-to-r from-xeops-accent to-red-700 text-white py-4 rounded-lg font-semibold hover:shadow-xl transition-all flex items-center justify-center">
+                            <span id="submitText">Lancer le Scan Gratuit</span>
+                            <div id="submitSpinner" class="loading-spinner ml-3 hidden"></div>
+                        </button>
+
+                        <p class="text-center text-sm text-gray-500">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 4px;">
+                                <path d="M9 12l2 2 4-4"/>
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
+                                <path d="M13 12h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h3"/>
+                            </svg>
+                            Sécurisé par reCAPTCHA • Données chiffrées • GDPR Compliant
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-heading font-bold text-center text-gray-800 mb-12">
+                <span class="en-content">What You'll Get</span>
+                <span class="fr-content">Ce que vous obtiendrez</span>
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold mb-2">
+                        <span class="en-content">Detailed Report</span>
+                        <span class="fr-content">Rapport Détaillé</span>
+                    </h3>
+                    <p class="text-gray-600">
+                        <span class="en-content">Complete analysis with prioritized recommendations</span>
+                        <span class="fr-content">Analyse complète avec recommandations prioritaires</span>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-green-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold mb-2">
+                        <span class="en-content">Zero False Positives</span>
+                        <span class="fr-content">Zero Faux Positifs</span>
+                    </h3>
+                    <p class="text-gray-600">
+                        <span class="en-content">Precision guaranteed by our AI</span>
+                        <span class="fr-content">Précision garantie par notre IA</span>
+                    </p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-red-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading font-bold mb-2">
+                        <span class="en-content">24h Delivery</span>
+                        <span class="fr-content">Livraison 24h</span>
+                    </h3>
+                    <p class="text-gray-600">
+                        <span class="en-content">Fast and actionable results</span>
+                        <span class="fr-content">Résultats rapides et actionnables</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="form-handler.js"></script>
+    <script>
+        // Language switching functionality
+        function switchLanguage(lang) {
+            const body = document.body;
+
+            if (lang === 'fr') {
+                body.classList.add('lang-fr');
+                localStorage.setItem('language', 'fr');
+            } else {
+                body.classList.remove('lang-fr');
+                localStorage.setItem('language', 'en');
+            }
+
+            // Update placeholders
+            updatePlaceholders(lang);
+        }
+
+        function updatePlaceholders(lang) {
+            const placeholders = {
+                'en': {
+                    'email': 'your.name@company.com',
+                    'jobTitle': 'e.g.: CISO, IT Manager',
+                    'phone': '+1 555 123 4567',
+                    'challenges': 'Describe your main cybersecurity challenges...'
+                },
+                'fr': {
+                    'email': 'votre.nom@entreprise.com',
+                    'jobTitle': 'ex: CISO, IT Manager',
+                    'phone': '+33 1 23 45 67 89',
+                    'challenges': 'Décrivez vos principaux défis en matière de cybersécurité...'
+                }
+            };
+
+            const currentPlaceholders = placeholders[lang];
+            Object.keys(currentPlaceholders).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.placeholder = currentPlaceholders[id];
+                }
+            });
+        }
+
+        // Detect language from URL parameters or referrer
+        function detectLanguageFromSource() {
+            // Check URL parameters first (e.g., ?lang=en)
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam && (langParam === 'en' || langParam === 'fr')) {
+                console.log('Language detected from URL parameter:', langParam);
+                return langParam;
+            }
+
+            // Check referrer URL for language context
+            const referrer = document.referrer;
+            if (referrer) {
+                console.log('Referrer URL:', referrer);
+
+                // Check for language indicators in referrer URL
+                if (referrer.includes('lang=en') || referrer.includes('/en/')) {
+                    console.log('English context detected from referrer');
+                    return 'en';
+                } else if (referrer.includes('lang=fr') || referrer.includes('/fr/')) {
+                    console.log('French context detected from referrer');
+                    return 'fr';
+                }
+
+                // Check if coming from main site and try to determine language
+                if (referrer.includes('xeops_final_site.html') || referrer.includes('blog.html') || referrer.includes('compliance.html')) {
+                    // Check localStorage for the main site's language preference
+                    const savedLang = localStorage.getItem('language');
+                    if (savedLang === 'fr') {
+                        console.log('French language detected from localStorage');
+                        return 'fr';
+                    } else if (savedLang === 'en') {
+                        console.log('English language detected from localStorage');
+                        return 'en';
+                    }
+                }
+            }
+
+            // Check browser language as fallback
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang && browserLang.toLowerCase().startsWith('fr')) {
+                console.log('French browser language detected');
+                return 'fr';
+            }
+
+            // Default to English for international audience
+            console.log('Defaulting to English');
+            return 'en';
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get language from various sources in order of priority:
+            // 1. URL parameter
+            // 2. Referrer page
+            // 3. Browser language
+            // 4. Default to English
+            const detectedLang = detectLanguageFromSource();
+            switchLanguage(detectedLang);
+        });
+    </script>
+</body>
+</html>
