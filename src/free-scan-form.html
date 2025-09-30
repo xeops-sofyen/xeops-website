@@ -5,29 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scan Gratuit | XeOps.ai - Cybersécurité Automatisée</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'xeops-dark': '#111111',
+                        'xeops-light': '#eeeeee',
+                        'xeops-accent': '#d72323',
+                        'xeops-surface': '#1a1a1a',
+                        'xeops-border': '#333333'
+                    },
+                    fontFamily: {
+                        'heading': ['Poppins', 'sans-serif'],
+                        'body': ['Open Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        :root {
-            --xeops-dark: #0f1419;
-            --xeops-surface: #1a1e23;
-            --xeops-border: #2d3748;
-            --xeops-accent: #dc2626;
-            --xeops-light: #e2e8f0;
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
         }
 
-        .font-heading { font-family: 'Poppins', sans-serif; }
-        .font-body { font-family: 'Inter', sans-serif; }
-        .bg-xeops-dark { background-color: var(--xeops-dark); }
-        .bg-xeops-surface { background-color: var(--xeops-surface); }
-        .bg-xeops-accent { background-color: var(--xeops-accent); }
-        .text-xeops-light { color: var(--xeops-light); }
-        .text-xeops-accent { color: var(--xeops-accent); }
-        .border-xeops-border { border-color: var(--xeops-border); }
-
         .form-hero {
-            background: linear-gradient(135deg, var(--xeops-dark) 0%, var(--xeops-surface) 100%);
+            background: linear-gradient(135deg, #111111 0%, #1a1a1a 100%);
             position: relative;
+            overflow: hidden;
+        }
+
+        .form-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(215,35,35,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #d72323, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .form-container {
@@ -130,7 +158,7 @@
         }
     </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-xeops-light text-xeops-dark">
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-xeops-dark/90 backdrop-blur-lg border-b border-xeops-border">
         <div class="container mx-auto px-4">
