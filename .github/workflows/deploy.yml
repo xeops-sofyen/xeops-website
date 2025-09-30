@@ -1,0 +1,212 @@
+name: 🚀 Deploy XeOps.ai Website
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: 🔍 Validate Files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 🐘 Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.0'
+
+    - name: 📦 Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: ✅ Validate HTML
+      run: |
+        echo "Validating HTML files..."
+        for file in src/*.html; do
+          if [ -f "$file" ]; then
+            echo "Checking $file"
+            # Basic HTML validation
+            if ! grep -q "<html" "$file" || ! grep -q "</html>" "$file"; then
+              echo "❌ Invalid HTML structure in $file"
+              exit 1
+            fi
+            echo "✅ $file is valid"
+          fi
+        done
+
+    - name: ✅ Validate JavaScript
+      run: |
+        echo "Validating JavaScript files..."
+        for file in src/*.js; do
+          if [ -f "$file" ]; then
+            echo "Checking $file"
+            node -c "$file"
+            echo "✅ $file is valid"
+          fi
+        done
+
+    - name: ✅ Validate PHP
+      run: |
+        echo "Validating PHP files..."
+        for file in src/*.php; do
+          if [ -f "$file" ]; then
+            echo "Checking $file"
+            php -l "$file"
+            echo "✅ $file is valid"
+          fi
+        done
+
+    - name: 🔒 Security Check
+      run: |
+        echo "Running security checks..."
+        # Check for common security issues
+        if grep -r "eval\|exec\|system\|shell_exec" src/ --include="*.php" --include="*.js"; then
+          echo "❌ Potentially dangerous functions found"
+          exit 1
+        fi
+        echo "✅ Security check passed"
+
+    - name: 📊 Check File Sizes
+      run: |
+        echo "Checking file sizes..."
+        find src/ -type f -size +1M -exec echo "⚠️ Large file: {} ($(du -h {} | cut -f1))" \;
+        echo "✅ File size check completed"
+
+  deploy-staging:
+    name: 🧪 Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref != 'refs/heads/main'
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 📋 Create deployment package
+      run: |
+        echo "Creating staging deployment package..."
+        tar -czf xeops-staging.tar.gz src/
+        echo "✅ Staging package created"
+
+    - name: 📤 Upload staging artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: xeops-staging
+        path: xeops-staging.tar.gz
+        retention-days: 7
+
+  deploy-production:
+    name: 🌟 Deploy to Production
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    environment: production
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 📋 Create production package
+      run: |
+        echo "Creating production deployment package..."
+        # Copy source files and rename main file
+        cp -r src/ production/
+        mv production/index.html production/index.html.bak
+        cp production/index.html.bak production/index.html
+
+        # Create deployment package
+        tar -czf xeops-production.tar.gz production/
+        echo "✅ Production package created"
+
+    - name: 📤 Upload production artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: xeops-production
+        path: xeops-production.tar.gz
+        retention-days: 30
+
+    - name: 📊 Generate deployment report
+      run: |
+        echo "# 🚀 Deployment Report" > deployment-report.md
+        echo "" >> deployment-report.md
+        echo "**Date:** $(date)" >> deployment-report.md
+        echo "**Commit:** ${{ github.sha }}" >> deployment-report.md
+        echo "**Branch:** ${{ github.ref_name }}" >> deployment-report.md
+        echo "" >> deployment-report.md
+        echo "## 📁 Files Deployed" >> deployment-report.md
+        echo "" >> deployment-report.md
+        find production/ -type f | while read file; do
+          echo "- \`$(basename "$file")\` ($(du -h "$file" | cut -f1))" >> deployment-report.md
+        done
+        echo "" >> deployment-report.md
+        echo "## ✅ Validation Results" >> deployment-report.md
+        echo "" >> deployment-report.md
+        echo "- HTML validation: ✅ Passed" >> deployment-report.md
+        echo "- JavaScript validation: ✅ Passed" >> deployment-report.md
+        echo "- PHP validation: ✅ Passed" >> deployment-report.md
+        echo "- Security check: ✅ Passed" >> deployment-report.md
+        echo "" >> deployment-report.md
+        echo "**Status: Ready for deployment** 🎉" >> deployment-report.md
+
+    - name: 📝 Create deployment summary
+      run: |
+        echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **Files validated and packaged successfully**" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "📦 **Package:** xeops-production.tar.gz" >> $GITHUB_STEP_SUMMARY
+        echo "📊 **Size:** $(du -h xeops-production.tar.gz | cut -f1)" >> $GITHUB_STEP_SUMMARY
+        echo "🔗 **Files:** $(find production/ -type f | wc -l) files ready for deployment" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Next Steps" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "1. Download the production artifact" >> $GITHUB_STEP_SUMMARY
+        echo "2. Run manual deployment using the deployment scripts" >> $GITHUB_STEP_SUMMARY
+        echo "3. Monitor the deployment with the monitoring scripts" >> $GITHUB_STEP_SUMMARY
+
+  github-pages:
+    name: 📚 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+    - name: 📥 Checkout code
+      uses: actions/checkout@v4
+
+    - name: 📋 Setup Pages
+      uses: actions/configure-pages@v3
+
+    - name: 🏗️ Build site for Pages
+      run: |
+        mkdir -p _site
+        cp -r src/* _site/
+        # Create a simple index redirect if needed
+        if [ ! -f "_site/index.html" ]; then
+          echo '<!DOCTYPE html><html><head><meta http-equiv="refresh" content="0;url=./src/index.html"></head><body>Redirecting...</body></html>' > _site/index.html
+        fi
+
+    - name: 📤 Upload Pages artifact
+      uses: actions/upload-pages-artifact@v2
+      with:
+        path: _site
+
+    - name: 🚀 Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v2
