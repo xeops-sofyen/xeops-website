@@ -132,9 +132,10 @@
 </head>
 <body class="bg-gray-100">
     <!-- Navigation -->
-    <nav class="bg-xeops-dark text-white py-4 fixed w-full top-0 z-50">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <a href="xeops_final_site.html" class="flex items-center xeops-logo">
+    <nav class="fixed w-full z-50 bg-xeops-dark/90 backdrop-blur-lg border-b border-xeops-border">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+            <a href="index.html" class="flex items-center xeops-logo">
                 <svg width="120" height="30" viewBox="0 0 3135.4401805869074 812.6297742920726">
                     <g transform="scale(6.772009029345371) translate(10, 10)">
                         <g featureKey="symbolFeature-0" transform="matrix(1.11111544387058,0,0,1.11111544387058,-5.42930547909648,-5.556823888473415)" fill="#fff">
@@ -146,26 +147,37 @@
                     </g>
                 </svg>
             </a>
-            <div class="flex items-center space-x-6">
-                <a href="xeops_final_site.html" class="hover:text-xeops-accent transition-colors">
-                    <span class="en-content">Home</span>
-                    <span class="fr-content">Accueil</span>
-                </a>
-                <a href="blog.html" class="hover:text-xeops-accent transition-colors">Blog</a>
-                <a href="compliance.html" class="hover:text-xeops-accent transition-colors">
-                    <span class="en-content">Security</span>
-                    <span class="fr-content">Sécurité</span>
-                </a>
-
-                <!-- Language Switcher -->
-                <div class="language-switcher">
-                    <button class="text-xeops-light hover:text-xeops-accent transition-colors text-sm">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 4px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="m5 5 14 14"/><path d="M9 12c0 4.97 2.01 9 4.5 9s4.5-4.03 4.5-9-2.01-9-4.5-9S9 7.03 9 12z"/></svg> <span class="en-content">EN</span><span class="fr-content">FR</span> ▼
-                    </button>
-                    <div class="language-dropdown">
-                        <a href="#" onclick="switchLanguage('en')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">English</a>
-                        <a href="#" onclick="switchLanguage('fr')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">Français</a>
+            <div class="hidden md:flex space-x-6">
+                    <a href="index.html#automation" class="text-xeops-light hover:text-xeops-accent transition-colors">
+                        <span class="en-content">Automation</span>
+                        <span class="fr-content">Automatisation</span>
+                    </a>
+                    <a href="index.html#mitre" class="text-xeops-light hover:text-xeops-accent transition-colors">MITRE ATT&CK</a>
+                    <a href="compliance.html" class="text-xeops-light hover:text-xeops-accent transition-colors">
+                        <span class="en-content">Compliance</span>
+                        <span class="fr-content">Conformité</span>
+                    </a>
+                    <a href="index.html#pricing" class="text-xeops-light hover:text-xeops-accent transition-colors">
+                        <span class="en-content">Pricing</span>
+                        <span class="fr-content">Tarifs</span>
+                    </a>
+                    <a href="index.html#contact" class="text-xeops-light hover:text-xeops-accent transition-colors">Contact</a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="text-xeops-light hover:text-xeops-accent transition-colors text-sm">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline; margin-right: 4px;"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="m5 5 14 14"/><path d="M9 12c0 4.97 2.01 9 4.5 9s4.5-4.03 4.5-9-2.01-9-4.5-9S9 7.03 9 12z"/></svg> <span class="en-content">EN</span><span class="fr-content">FR</span> ▼
+                        </button>
+                        <div class="language-dropdown">
+                            <a href="#" onclick="switchLanguage('en')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">English</a>
+                            <a href="#" onclick="switchLanguage('fr')" class="block px-3 py-2 text-sm text-white hover:bg-xeops-accent">Français</a>
+                        </div>
                     </div>
+                    <a href="free-scan-form.html?lang=auto" class="bg-xeops-accent text-white px-4 py-2 rounded-lg font-semibold hover:bg-red-700 transition-all" onclick="setFormLanguage(this)">
+                        <span class="en-content">Free Demo</span>
+                        <span class="fr-content">Démo Gratuite</span>
+                    </a>
                 </div>
             </div>
         </div>
