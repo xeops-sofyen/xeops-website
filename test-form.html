@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Formulaire XeOps</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-6">
+        <h1 class="text-2xl font-bold mb-6 text-gray-800">Test Formulaire de Contact XeOps</h1>
+
+        <div id="alertMessage" class="hidden mb-4"></div>
+
+        <form id="testForm" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Prénom *</label>
+                    <input type="text" id="firstName" name="firstName" value="Jean" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+                    <input type="text" id="lastName" name="lastName" value="Dupont" required
+                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                <input type="email" id="email" name="email" value="jean.dupont@testcompany.fr" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Entreprise *</label>
+                <input type="text" id="company" name="company" value="Test Company SARL" required
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Poste</label>
+                <input type="text" id="jobTitle" name="jobTitle" value="Responsable Sécurité"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Téléphone</label>
+                <input type="tel" id="phone" name="phone" value="+33 6 12 34 56 78"
+                       class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Taille de l'entreprise *</label>
+                <select id="companySize" name="companySize" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                    <option value="">Sélectionnez...</option>
+                    <option value="1-10">1-10 employés</option>
+                    <option value="11-50" selected>11-50 employés</option>
+                    <option value="51-200">51-200 employés</option>
+                    <option value="201-1000">201-1000 employés</option>
+                    <option value="1000+">1000+ employés</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Secteur d'activité *</label>
+                <select id="industry" name="industry" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                    <option value="">Sélectionnez...</option>
+                    <option value="finance">Finance</option>
+                    <option value="healthcare">Santé</option>
+                    <option value="technology" selected>Technologie</option>
+                    <option value="manufacturing">Industrie</option>
+                    <option value="retail">Commerce</option>
+                    <option value="government">Gouvernement</option>
+                    <option value="education">Éducation</option>
+                    <option value="other">Autre</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">Infrastructure *</label>
+                <div class="space-y-2">
+                    <label class="flex items-center">
+                        <input type="checkbox" name="infrastructure" value="cloud" checked class="mr-2">
+                        <span class="text-gray-700">Cloud (AWS, Azure, GCP)</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="infrastructure" value="on-premise" checked class="mr-2">
+                        <span class="text-gray-700">On-Premise</span>
+                    </label>
+                    <label class="flex items-center">
+                        <input type="checkbox" name="infrastructure" value="hybrid" class="mr-2">
+                        <span class="text-gray-700">Hybride</span>
+                    </label>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Urgence</label>
+                <select id="urgency" name="urgency"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">
+                    <option value="normal" selected>Normal (48h)</option>
+                    <option value="urgent">Urgent (24h)</option>
+                    <option value="critical">Critique (12h)</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Défis de sécurité</label>
+                <textarea id="challenges" name="challenges" rows="3"
+                          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500">Nous cherchons à renforcer notre infrastructure cloud et à identifier les vulnérabilités potentielles dans nos systèmes.</textarea>
+            </div>
+
+            <div class="space-y-2">
+                <label class="flex items-center">
+                    <input type="checkbox" id="gdprConsent" name="gdprConsent" checked required class="mr-2">
+                    <span class="text-sm text-gray-700">J'accepte le traitement de mes données *</span>
+                </label>
+                <label class="flex items-center">
+                    <input type="checkbox" id="marketingConsent" name="marketingConsent" class="mr-2">
+                    <span class="text-sm text-gray-700">J'accepte de recevoir des communications marketing</span>
+                </label>
+            </div>
+
+            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+
+            <button type="submit" id="submitBtn"
+                    class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors">
+                <span id="submitText">Envoyer le test</span>
+                <span id="submitSpinner" class="hidden ml-2">⏳</span>
+            </button>
+        </form>
+
+        <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h3 class="font-semibold text-blue-900 mb-2">Instructions de test:</h3>
+            <ol class="list-decimal list-inside text-sm text-blue-800 space-y-1">
+                <li>Remplissez le formulaire (pré-rempli avec des données de test)</li>
+                <li>Cliquez sur "Envoyer le test"</li>
+                <li>Vérifiez votre email à contact@xeops.ai</li>
+                <li>Vérifiez les fichiers dans src/scan_requests/</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('testForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            const alertMessage = document.getElementById('alertMessage');
+
+            // Disable button
+            submitBtn.disabled = true;
+            submitText.textContent = 'Envoi en cours...';
+            submitSpinner.classList.remove('hidden');
+            alertMessage.classList.add('hidden');
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                company: formData.get('company'),
+                jobTitle: formData.get('jobTitle'),
+                phone: formData.get('phone'),
+                companySize: formData.get('companySize'),
+                industry: formData.get('industry'),
+                infrastructure: formData.getAll('infrastructure'),
+                urgency: formData.get('urgency'),
+                challenges: formData.get('challenges'),
+                gdprConsent: formData.get('gdprConsent') === 'on',
+                marketingConsent: formData.get('marketingConsent') === 'on',
+                submissionDate: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                sourceUrl: window.location.href,
+                recaptchaResponse: grecaptcha.getResponse()
+            };
+
+            try {
+                const response = await fetch('src/form-submit.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alertMessage.className = 'mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded-lg';
+                    alertMessage.innerHTML = `
+                        <div class="font-semibold mb-2">✅ Succès!</div>
+                        <div class="text-sm">
+                            <p><strong>Scan ID:</strong> ${result.scanId}</p>
+                            <p><strong>Message:</strong> ${result.message}</p>
+                            <p><strong>Fichier:</strong> ${result.filename}</p>
+                            <p class="mt-2">Vérifiez votre email à contact@xeops.ai</p>
+                        </div>
+                    `;
+                    alertMessage.classList.remove('hidden');
+                } else {
+                    throw new Error(result.message || 'Erreur inconnue');
+                }
+
+            } catch (error) {
+                alertMessage.className = 'mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg';
+                alertMessage.innerHTML = `
+                    <div class="font-semibold mb-2">❌ Erreur</div>
+                    <div class="text-sm">${error.message}</div>
+                `;
+                alertMessage.classList.remove('hidden');
+            } finally {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Envoyer le test';
+                submitSpinner.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+</html>

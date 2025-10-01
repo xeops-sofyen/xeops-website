@@ -4,24 +4,15 @@
  * Handles form submission, validation, and data storage for CRM integration
  */
 
+// Load configuration and email sender
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/email-sender.php';
+
 // Enable CORS for development
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Content-Type');
 header('Content-Type: application/json');
-
-// Configuration
-define('RECAPTCHA_SECRET_KEY', '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'); // Test key
-define('DATA_DIR', './scan_requests/');
-define('LOG_FILE', './logs/form_submissions.log');
-
-// Ensure directories exist
-if (!file_exists(DATA_DIR)) {
-    mkdir(DATA_DIR, 0755, true);
-}
-if (!file_exists(dirname(LOG_FILE))) {
-    mkdir(dirname(LOG_FILE), 0755, true);
-}
 
 /**
  * Main form handler
@@ -73,8 +64,11 @@ function handleFormSubmission() {
         // Prepare CRM data
         prepareCRMData($processedData);
 
-        // Send confirmation email (placeholder)
-        // sendConfirmationEmail($processedData);
+        // Send notification email to XeOps team
+        sendNotificationEmail($processedData);
+
+        // Send confirmation email to customer
+        sendConfirmationEmail($processedData);
 
         // Calculate delivery time
         $deliveryTime = calculateDeliveryTime($processedData['urgency']);
@@ -330,31 +324,19 @@ function calculateDeliveryTime($urgency) {
 }
 
 /**
- * Send confirmation email (placeholder)
+ * Send notification email to XeOps team
+ */
+function sendNotificationEmail($data) {
+    $emailSender = new EmailSender();
+    return $emailSender->sendNotificationEmail($data);
+}
+
+/**
+ * Send confirmation email to customer
  */
 function sendConfirmationEmail($data) {
-    // TODO: Implement email sending
-    // This would integrate with your email service (SendGrid, Mailgun, etc.)
-
-    $to = $data['email'];
-    $subject = "Confirmation de votre demande de scan - " . $data['scanId'];
-    $message = "
-    Bonjour {$data['firstName']},
-
-    Votre demande de scan de sécurité a été reçue avec succès.
-
-    Détails:
-    - ID de scan: {$data['scanId']}
-    - Entreprise: {$data['company']}
-    - Urgence: {$data['urgency']}
-
-    Vous recevrez votre rapport dans les délais indiqués.
-
-    Cordialement,
-    L'équipe XeOps.ai
-    ";
-
-    // mail($to, $subject, $message); // Uncomment when email is configured
+    $emailSender = new EmailSender();
+    return $emailSender->sendConfirmationEmail($data);
 }
 
 // Handle the request
